@@ -13,7 +13,8 @@ export default function App() {
       category: ''
     }
   )
-console.log(apiValues)
+  const [start, setStart] = useState(false)
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i>0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -64,8 +65,15 @@ console.log(apiValues)
   console.log(questions) 
   return (
     <div id="container">
-      <HomePage apiValues={apiValues} setApiValues={setApiValues} />
-      <Quiz questions={questions} />
+      {
+        !start
+          ? <HomePage 
+              apiValues={apiValues} 
+              setApiValues={setApiValues} 
+              setStart={setStart}
+            />
+          : <Quiz questions={questions} />
+      }
     </div>
   )
 }

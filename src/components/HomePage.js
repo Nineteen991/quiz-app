@@ -1,4 +1,4 @@
-export default function HomePage({ apiValues, setApiValues }) {
+export default function HomePage({ apiValues, setApiValues, setStart }) {
 
   function handleSelections(e) {
     const { name, value } = e.target
@@ -10,15 +10,25 @@ export default function HomePage({ apiValues, setApiValues }) {
     ))
   }
 
+  function startQuiz(e) {
+    e.preventDefault()
+    
+    // only start quiz if all 3 input values have been filled
+    if (apiValues.difficulty && apiValues.number && apiValues.category) {
+      setStart(true)
+    }
+  }
+
   return (
     <div className="homePage">
-      <h1>Trivia App</h1>
+      <h1 className="title">Trivia App</h1>
       <form className="form-selections">
 
         <label htmlFor="difficulty">Set difficulty:</label>
         <select 
           name="difficulty" 
           id="difficulty" 
+          className="input-seletors"
           value={apiValues.difficulty}
           onChange={handleSelections}
         >
@@ -32,6 +42,7 @@ export default function HomePage({ apiValues, setApiValues }) {
         <select 
           name="number" 
           id="number" 
+          className="input-seletors"
           value={apiValues.number}
           onChange={handleSelections}
         >
@@ -46,6 +57,7 @@ export default function HomePage({ apiValues, setApiValues }) {
         <select 
           name="category" 
           id="category" 
+          className="input-seletors"
           value={apiValues.category}
           onChange={handleSelections}
         >
@@ -56,6 +68,13 @@ export default function HomePage({ apiValues, setApiValues }) {
           <option value="12">Music</option>
           <option value="13">Musicals & Theaters</option>
         </select>
+
+        <button 
+          id="startBtn" 
+          onClick={e => startQuiz(e)}
+        >
+          Start Quiz
+        </button>
 
       </form>
     </div>

@@ -1,2 +1,19 @@
+.homePage
+    width: 10%
+    @include string-settings
+
 .form-selections
-    color: white
+    display: flex
+    flex-direction: column
+
+.input-seletors
+    margin-bottom: 1rem
+
+#startBtn
+    margin-top: 1rem
+    background-color: #ffaa80
+    @include buttons
+
+    &:active
+        background-color: #ff9966
+        @include box-shadow
