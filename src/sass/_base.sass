@@ -1,6 +1,5 @@
-$color-primary: #eb2f64
-$color-primary-light: #ff4a77
-$color-primary-dark: #772241
+$color-primary-light: #FDC830
+$color-primary-dark: #F37335
 
 $color-secondary-light: #6dd5ed
 $color-secondary-dark: #2193b0
@@ -24,10 +23,11 @@ html
 body
   line-height: 1.6
   background-image: linear-gradient(to right bottom, $color-secondary-light,$color-secondary-dark)
-  min-height: 100vh
 
 #container
+  min-height: 100vh
   font-size: 1.6rem
-  display: flex
+  @include string-settings
+  
+  @include flex-center
   justify-content: center
-  align-items: center

@@ -1,0 +1,17 @@
+.quiz
+    @include flex-center
+    flex-direction: column
+
+.question-card
+    padding: 1.5rem 0
+    width: 60%
+    border-bottom: 1px solid white
+
+.answers-div
+    padding: 1rem 0
+    display: flex
+    justify-content: space-between
+
+.answers
+    @include buttons
+    background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)

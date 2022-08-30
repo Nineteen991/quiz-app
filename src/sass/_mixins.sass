@@ -9,8 +9,16 @@
     cursor: pointer
     font-weight: bold
     @include string-settings
+
+    &:active
+        background-color: #ff9966
+        @include box-shadow
     
 @mixin box-shadow
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7)
     -moz-box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7)
     -webkit-box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7)
+
+@mixin flex-center
+    display: flex
+    align-items: center
