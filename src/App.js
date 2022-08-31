@@ -93,7 +93,10 @@ export default function App() {
               setApiValues={setApiValues} 
               setStart={setStart}
             />
-          : <Quiz questions={questions} />
+          : <Quiz 
+              questions={questions} 
+              setQuestions={setQuestions}
+            />
       }
     </div>
   )
