@@ -4,8 +4,10 @@
 
 .question-card
     padding: 1.5rem 0
-    width: 60%
-    border-bottom: 1px solid white
+    width: 75%
+
+    :not(:last-child)
+        border-bottom: 1px solid white
 
 .answers-div
     padding: 1rem 0
@@ -14,4 +16,41 @@
 
 .answers
     @include buttons
-    background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)
+    background: #0F2027  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027)  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.guess
+    @include buttons
+    background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark)
+
+.correct-answers
+    @include buttons
+    background: #1f4037  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #99f2c8, #1f4037)  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #99f2c8, #1f4037) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.wrong-answer 
+    @include buttons
+    background: #c31432  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #240b36, #c31432)  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #240b36, #c31432) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+.grade
+    width: 100%
+    margin: 2rem 0 4rem
+    display: flex
+    justify-content: space-evenly
+
+#grade-quiz
+    @include buttons
+    background: #12c2e9  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9)  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+#try-again
+    @include buttons
+    background: #12c2e9  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9)  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

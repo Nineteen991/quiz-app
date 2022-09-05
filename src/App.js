@@ -15,11 +15,16 @@ export default function App() {
     }
   )
   const [start, setStart] = useState(false)
+
   const htmlEntities = {
     '&quot;': '"',
     '&#039;': "'",
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
   }
 
+  // I can't take credit for the shuffleArray function; it's from stack overflow
   function shuffleArray(array) {
     for (let i = array.length - 1; i>0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -61,6 +66,9 @@ export default function App() {
             const newQuestion = question.question.replaceAll(
               /&#?\w+;/g, match => htmlEntities[match]
             )
+            const newCorrectAnswer = question.correct_answer.replaceAll(
+              /&#?\w+;/g, match => htmlEntities[match]
+            )
 
             // combine answers & shuffle them
             question.incorrect_answers.push(question.correct_answer)
@@ -69,7 +77,9 @@ export default function App() {
             // for ea answer, I should probably check if they've been clicked
             const newAnswers = question.incorrect_answers.map(answer => (
               {
-                answer: answer,
+                answer: answer.replaceAll(
+                  /&#?\w+;/g, match => htmlEntities[match]
+                ),
                 isClicked: false,
                 id: uuid()
               }
@@ -83,6 +93,7 @@ export default function App() {
             return {
               ...question,
               question: newQuestion,
+              correct_answer: newCorrectAnswer,
               answers: newAnswers,
               id: uuid()
             }
@@ -106,6 +117,8 @@ export default function App() {
           : <Quiz 
               questions={questions} 
               setQuestions={setQuestions}
+              setStart={setStart}
+              setApiValues={setApiValues}
             />
       }
     </div>
