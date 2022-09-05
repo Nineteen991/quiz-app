@@ -15,6 +15,10 @@ export default function App() {
     }
   )
   const [start, setStart] = useState(false)
+  const htmlEntities = {
+    '&quot;': '"',
+    '&#039;': "'",
+  }
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i>0; i--) {
@@ -37,12 +41,12 @@ export default function App() {
       return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}`)
     }
     else {
-      throw Error('You broke the goFetch function')
+      throw Error('You broke the fetch function')
     }
   }
 
   useEffect(() => {
-    // only fetch if we have at least have number of questions
+    // only fetch if we at least have number of questions
     if (apiValues.number) {
       goFetch()
         .then(res => {
@@ -53,6 +57,11 @@ export default function App() {
         })
         .then(data => {
           const formatedQuestions = data.results.map(question => {
+            // replace the html entities from the api
+            const newQuestion = question.question.replaceAll(
+              /&#?\w+;/g, match => htmlEntities[match]
+            )
+
             // combine answers & shuffle them
             question.incorrect_answers.push(question.correct_answer)
             shuffleArray(question.incorrect_answers)
@@ -73,6 +82,7 @@ export default function App() {
 
             return {
               ...question,
+              question: newQuestion,
               answers: newAnswers,
               id: uuid()
             }
@@ -83,7 +93,7 @@ export default function App() {
         .catch(error => console.error(error))
     }
   }, [apiValues])
-  console.log(questions) 
+
   return (
     <div id="container">
       {
