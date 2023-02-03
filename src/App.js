@@ -16,14 +16,6 @@ export default function App() {
   )
   const [start, setStart] = useState(false)
 
-  const htmlEntities = {
-    '&quot;': '"',
-    '&#039;': "'",
-    '&amp;': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-  }
-
   // I can't take credit for the shuffleArray function; it's from stack overflow
   function shuffleArray(array) {
     for (let i = array.length - 1; i>0; i--) {
@@ -32,26 +24,34 @@ export default function App() {
     }
   }
 
-  const goFetch = async () => {
-    if (apiValues.difficulty && apiValues.number && apiValues.category) {
-      return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&category=${apiValues.category}&difficulty=${apiValues.difficulty}`)
-    } 
-    else if (!apiValues.difficulty && apiValues.number && apiValues.category) {
-      return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&category=${apiValues.category}`)
-    } 
-    else if (apiValues.difficulty && apiValues.number && !apiValues.category) {
-      return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&difficulty=${apiValues.difficulty}`)
-    }
-    else if (!apiValues.difficulty && apiValues.number && !apiValues.category) {
-      return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}`)
-    }
-    else {
-      throw Error('You broke the fetch function')
-    }
-  }
-
   useEffect(() => {
+    const htmlEntities = {
+      '&quot;': '"',
+      '&#039;': "'",
+      '&amp;': '&',
+      '&lt;': '<',
+      '&gt;': '>',
+    }
+
     // only fetch if we at least have number of questions
+    const goFetch = async () => {
+      if (apiValues.difficulty && apiValues.number && apiValues.category) {
+        return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&category=${apiValues.category}&difficulty=${apiValues.difficulty}`)
+      } 
+      else if (!apiValues.difficulty && apiValues.number && apiValues.category) {
+        return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&category=${apiValues.category}`)
+      } 
+      else if (apiValues.difficulty && apiValues.number && !apiValues.category) {
+        return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}&difficulty=${apiValues.difficulty}`)
+      }
+      else if (!apiValues.difficulty && apiValues.number && !apiValues.category) {
+        return await fetch(`https://opentdb.com/api.php?amount=${apiValues.number}`)
+      }
+      else {
+        throw Error('You broke the fetch function')
+      }
+    }
+
     if (apiValues.number) {
       goFetch()
         .then(res => {
